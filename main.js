@@ -4,28 +4,27 @@ document.getElementById("data").addEventListener("click", dataRequest);
 
 function dataRequest() {
 
-  var resultado = document.getElementById('resultado');
-  resultado.innerHTML = '';
+  var divresultado = document.getElementById('resultado');
+  divresultado.innerHTML = '';
 
-  axios.get('https://lanbide-node.herokuapp.com')
+  axios.get('http://jsonplaceholder.typicode.com/todos')
     .then(function (response) {
-      resultado.innerHTML = successHTMLOutput(response);
+      divresultado.innerHTML = JSON.stringify(response.headers, null, '\t') ;
+      var datos = JSON.parse(response.data);
+    // divresultado.innerHTML += datos.UserId;
     })
     .catch(function (error) {
-      resultado.innerHTML = errorHTMLOutput(error);
+      divresultado.innerHTML = errorHTMLOutput(error);
     });
 
 }
 
-function successHTMLOutput(response) {
-  return  '<h4>Respuesta</h4>' +
-          '<h5>Estado:</h5> ' +
-          '<pre>' + response.status + ' ' + response.statusText + '</pre>' +
-          '<h5>Headers:</h5>' +
-          '<pre>' + JSON.stringify(response.headers, null, '\t') + '</pre>' +
-          '<h5>Datos:</h5>' +
-          '<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>';
-}
+//function successHTMLOutput(response) {
+//  return  '<p>Respuesta' + response.status + ' ' + response.statusText + '</p>' +
+//          '<h3>Datos:</h3>';
+//          '<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>';
+
+//}
 
 function errorHTMLOutput(error) {
   return  '<h4>Result</h4>' +
