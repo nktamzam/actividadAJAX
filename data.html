@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Practica AJAX GET</h1>
+<button id="data">Data</button>
+<img id="loading" src="spinner.gif"  height="100" width="100">
+<p id="resultado"></p>
+
+<style>#loading {display: none;}</style>
+
+<script src="main.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+document.getElementById("data").addEventListener("click", dataRequest);
+</script>
+</body>
+</html>

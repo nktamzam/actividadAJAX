@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Practica AJAX Post</h1>
+<p>
+<label for="name">Name</label>
+<input type="text" name="name" id="name">
+</p>
+
+<p>
+<label for="username">Username</label>
+<input type="text" name="username" id="username">
+</p>
+
+<p>
+<label for="email">E-mail</label>
+<input type="text" name="email" id="email">
+</p>
+
+<p>
+<label for="avatar">Avatar</label>
+<input type="text" name="avatar" id="avatar">
+</p>
+
+<button id="new">Nuevo</button>
+<img id="loading" src="spinner.gif"  height="100" width="100">
+<p id="resultado"></p>
+
+<style>#loading {display: none;}</style>
+
+<script src="main.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+document.getElementById("new").addEventListener("click", postRequest);
+</script>
+</body>
+</html>
