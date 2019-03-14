@@ -2,38 +2,27 @@
 
 document.getElementById("data").addEventListener("click", dataRequest);
 
+
 function dataRequest() {
 
   var divresultado = document.getElementById('resultado');
   divresultado.innerHTML = '';
 
-  axios.get('http://jsonplaceholder.typicode.com/todos')
+  axios.get('http://jsonplaceholder.typicode.com/todos/', {
+    onDownloadProgress: function(event) {
+       var porcentaje = Math.round((event.loaded  / event.total ) * 100);
+       console.log('download', porcentaje);
+       document.getElementById("progreso").value = porcentaje;
+     }
+    })
     .then(function (response) {
-      divresultado.innerHTML = JSON.stringify(response.headers, null, '\t') ;
-      var datos = JSON.parse(response.data);
-    // divresultado.innerHTML += datos.UserId;
+      divresultado.innerHTML = '<p>Respuesta: <pre>' + response.status + ' ' + response.statusText + '</pre></p>';
+      //divresultado.innerHTML += JSON.stringify(response.headers, null, '\t');
+      divresultado.innerHTML += '<p><pre>' + JSON.stringify(response.data, null, '\t') + '</p></pre>';
     })
     .catch(function (error) {
-      divresultado.innerHTML = errorHTMLOutput(error);
+      divresultado.innerHTML = '<p>Respuesta: <pre>' + error.response.status + ' ' + error.response.statusText + '</pre></p>';
+      divresultado.innerHTML += JSON.stringify(error.response.headers, null, '\t');
+      divresultado.innerHTML += '<p><pre>' + JSON.stringify(error.response.data, null, '\t') + '</p></pre>';
     });
-
-}
-
-//function successHTMLOutput(response) {
-//  return  '<p>Respuesta' + response.status + ' ' + response.statusText + '</p>' +
-//          '<h3>Datos:</h3>';
-//          '<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>';
-
-//}
-
-function errorHTMLOutput(error) {
-  return  '<h4>Result</h4>' +
-          '<h5>Message:</h5> ' +
-          '<pre>' + error.message + '</pre>' +
-          '<h5>Estado:</h5> ' +
-          '<pre>' + error.response.status + ' ' + error.response.statusText + '</pre>' +
-          '<h5>Headers:</h5>' +
-          '<pre>' + JSON.stringify(error.response.headers, null, '\t') + '</pre>' +
-          '<h5>Datos:</h5>' +
-          '<pre>' + JSON.stringify(error.response.data, null, '\t') + '</pre>';
 }
