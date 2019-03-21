@@ -12,12 +12,11 @@ let dataRequest = () => {
 
       var i;
       for (i in datos){
-      divresultado.innerHTML += "<dl>";
-      divresultado.innerHTML += "<dt>Name</dt><dd>" + datos[i].name + "</dd>";
-      divresultado.innerHTML += "<dt>Username</dt><dd>" + datos[i].username + "</dd>";
-      divresultado.innerHTML += "<dt>Email</dt><dd>" + datos[i].email + "</dd>";
-      divresultado.innerHTML += "<dt>Avatar</dt><dd>" + datos[i].avatar + "</dd>";
-      divresultado.innerHTML += "</dl>";
+        divresultado.innerHTML += `<dl> <dt>Name</dt><dd> ${datos[i].name} </dd>
+        <dt>Username</dt><dd>${datos[i].username} </dd>
+        <dt>Email</dt><dd> ${datos[i].email} </dd>
+        <dt>Avatar</dt><dd> ${datos[i].avatar} </dd></dl>`;
+           }
        }
 
     })
